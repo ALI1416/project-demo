@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket</title>
+  <script src="js/stomp-1.7.1.js"></script>
+</head>
+
+<body>
+<div>
+  <h3>配置</h3>
+  <label for="usernameText">用户名：</label>
+  <input id="usernameText" type="text" value="ali">
+  <button id="connectBtn">连接</button>
+  <h4>连接错误信息：</h4>
+  <textarea id="errorMsg" readonly cols="50" rows="5"></textarea>
+</div>
+<div>
+  <h3>广播模式</h3>
+  <label for="broadcastText">发送内容：</label>
+  <input id="broadcastText" type="text" value="广播内容">
+  <button id="broadcastBtn" disabled>发送</button>
+  <h4>广播消息：</h4>
+  <textarea id="broadcastMsg" readonly cols="50" rows="5"></textarea>
+</div>
+<div>
+  <h3>用户模式</h3>
+  <label for="userSendUsernameText">发送用户：</label>
+  <input id="userSendUsernameText" type="text" value="ali">
+  <br>
+  <label for="userText">发送内容：</label>
+  <input id="userText" type="text" value="发送内容">
+  <button id="userBtn" disabled>发送</button>
+  <h4>用户消息：</h4>
+  <textarea id="userMsg" readonly cols="50" rows="5"></textarea>
+</div>
+</body>
+<script>
+  // 开发(直接访问)
+  // const url = 'ws://127.0.0.1:8081/ws'
+  // 测试(nginx反向代理)
+  // const url = 'ws://127.0.0.1/api/ws'
+  // 生产(nginx反向代理+域名+SSL)
+  const url = 'wss://ws.404z.cn/api/ws'
+  const broadcastSend = '/app/broadcast'
+  const broadcastSubscribe = '/topic/broadcast'
+  const sendToUserSend = '/app/sendToUser/'
+  const sendToUserSubscribe = '/user/queue/sendToUser'
+
+  const usernameText = document.getElementById('usernameText')
+  const connectBtn = document.getElementById('connectBtn')
+  const errorMsg = document.getElementById('errorMsg')
+  const broadcastText = document.getElementById('broadcastText')
+  const broadcastBtn = document.getElementById('broadcastBtn')
+  const broadcastMsg = document.getElementById('broadcastMsg')
+  const userSendUsernameText = document.getElementById('userSendUsernameText')
+  const userText = document.getElementById('userText')
+  const userBtn = document.getElementById('userBtn')
+  const userMsg = document.getElementById('userMsg')
+  let stomp
+
+  /**
+   * 连接/断开按钮
+   */
+  connectBtn.addEventListener('click', function () {
+    if (stomp === undefined) {
+      connectBtn.innerText = '连接中...'
+      connectBtn.setAttribute('disabled', 'true')
+      connect()
+    } else {
+      disconnect()
+    }
+  })
+
+  /**
+   * 连接
+   */
+  function connect() {
+    const headers = {
+      username: usernameText.value
+    }
+    stomp = Stomp.client(url)
+    stomp.connect(headers, connectCallback, errorCallback)
+  }
+
+  /**
+   * 连接成功回调
+   */
+  function connectCallback() {
+    connectStatus(true)
+    // 广播消息
+    stomp.subscribe(broadcastSubscribe, function (res) {
+      broadcastMsg.value = res.body + '\n' + broadcastMsg.value
+    })
+    // 用户消息
+    stomp.subscribe(sendToUserSubscribe, function (res) {
+      userMsg.value = res.body + '\n' + userMsg.value
+    })
+  }
+
+  /**
+   * 连接错误回调
+   */
+  function errorCallback(e) {
+    connectStatus(false)
+    stomp = undefined
+    errorMsg.value = e + '\n' + errorMsg.value
+  }
+
+  /**
+   * 断开
+   */
+  function disconnect() {
+    if (stomp !== undefined) {
+      stomp.disconnect()
+      stomp = undefined
+      connectStatus(false)
+    }
+  }
+
+  /**
+   * 改变连接状态显示
+   */
+  function connectStatus(status) {
+    connectBtn.removeAttribute('disabled')
+    broadcastBtn.removeAttribute('disabled')
+    if (status) {
+      connectBtn.innerText = '断开'
+      userBtn.removeAttribute('disabled')
+    } else {
+      connectBtn.innerText = '连接'
+      broadcastBtn.setAttribute('disabled', 'true')
+      userBtn.setAttribute('disabled', 'true')
+    }
+  }
+
+  /**
+   * 发送广播消息
+   */
+  broadcastBtn.addEventListener('click', function () {
+    stomp.send(broadcastSend, {}, broadcastText.value)
+  })
+
+  /**
+   * 发送用户消息
+   */
+  userBtn.addEventListener('click', function () {
+    stomp.send(sendToUserSend + userSendUsernameText.value, {}, userText.value)
+  })
+
+</script>
+
+</html>
