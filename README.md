@@ -10,4 +10,7 @@
 
 ## 项目
 
+- `demo-access-log` 访问记录示例
+  - `java -Xms32m -Xmx32m -jar demo-access-log-1.0.0.jar`
 - `demo-ws` WebSocket示例
+  - `java -Xms16m -Xmx16m -jar demo-ws-1.0.0.jar`

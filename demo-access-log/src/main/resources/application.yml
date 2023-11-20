@@ -1,0 +1,31 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 4GB
+      max-request-size: 4GB
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: access_log
+      # username:
+      # password:
+      auto-index-creation: true
+
+server:
+  port: 8080
+
+id:
+  machine-id: 0
+  machine-bits: 8
+  sequence-bits: 12
+
+ip2region:
+  resource-path: /file/ip2region/ip2region.zdb
+
+logging:
+  file:
+    name: /log/demo-access-log.log

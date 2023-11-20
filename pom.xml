@@ -20,6 +20,7 @@
   </parent>
 
   <modules>
+    <module>demo-access-log</module>
     <module>demo-ws</module>
   </modules>
 
@@ -30,6 +31,13 @@
     <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!--雪花ID生成器-->
+    <id.version>3.0.1</id.version>
+    <!--IP地址转区域-->
+    <ip2region.version>3.1.2</ip2region.version>
+    <!--FastJson-->
+    <fastjson.version>2.0.42</fastjson.version>
   </properties>
 
   <dependencies>
@@ -52,6 +60,35 @@
       <artifactId>logback-classic</artifactId>
     </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--雪花ID生成器-->
+      <dependency>
+        <groupId>cn.404z</groupId>
+        <artifactId>id-spring-boot-autoconfigure</artifactId>
+        <version>${id.version}</version>
+      </dependency>
+      <!--IP地址转区域-->
+      <dependency>
+        <groupId>cn.404z</groupId>
+        <artifactId>ip2region-spring-boot-autoconfigure</artifactId>
+        <version>${ip2region.version}</version>
+      </dependency>
+      <!--FastJson-->
+      <dependency>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+      <!--FastJson Extension Spring5-->
+      <dependency>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2-extension-spring5</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
