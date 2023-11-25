@@ -8,8 +8,6 @@ import com.demo.dao.mongo.LoginLogDao;
 import com.demo.entity.po.LoginLog;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +38,7 @@ public class LoginLogService {
         LoginLog loginLog = new LoginLog();
         loginLog.setId(Id.next());
         loginLog.setCreateTime(Clock.timestamp());
-        loginLog.setUri((String) new ServletRequestAttributes(request).getAttribute(RequestDispatcher.ERROR_REQUEST_URI, RequestAttributes.SCOPE_REQUEST));
+        loginLog.setUri((String) request.getAttribute(RequestDispatcher.FORWARD_SERVLET_PATH));
         loginLog.setMethod(request.getMethod());
         String ip = request.getHeader("X-Real-IP");
         if (ip == null) {
