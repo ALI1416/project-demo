@@ -5,7 +5,8 @@ import com.demo.entity.pojo.Result;
 import com.demo.service.LoginLogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * <h1>首页</h1>
  *
  * <p>
- * createDate 2023/10/12 14:17:18
+ * createDate 2021/09/10 14:37:57
  * </p>
  *
  * @author ALI[ali-k@foxmail.com]
@@ -23,16 +24,15 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @AllArgsConstructor
 @Slf4j
-public class IndexController {
+public class IndexController implements ErrorController {
 
-    private final HttpServletRequest request;
     private final LoginLogService loginLogService;
 
     /**
-     * 首页
+     * 页面找不到
      */
-    @GetMapping
-    public Result<LoginLog> index() {
+    @RequestMapping("error")
+    public Result<LoginLog> error(HttpServletRequest request) {
         LoginLog loginLog = loginLogService.insert(request);
         log.info(loginLog.toString());
         return Result.o(loginLog);

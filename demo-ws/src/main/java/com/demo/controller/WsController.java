@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
@@ -24,9 +25,6 @@ import java.security.Principal;
 @Slf4j
 public class WsController {
 
-    /**
-     * WebSocket模板
-     */
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     /**
@@ -34,7 +32,17 @@ public class WsController {
      */
     @MessageMapping("/broadcast")
     public String broadcast(String msg, Principal principal) {
-        String data = "用户[" + principal.getName() + "]发送广播消息[" + msg + "]";
+        String data = "广播模式:用户[" + principal.getName() + "]发送广播消息[" + msg + "]";
+        log.info(data);
+        return data;
+    }
+
+    /**
+     * 订阅模式
+     */
+    @SubscribeMapping("/subscribe/{path}")
+    public String subscribe(@DestinationVariable String path, Principal principal) {
+        String data = "订阅模式:用户[" + principal.getName() + "]订阅[/subscribe/" + path + "]";
         log.info(data);
         return data;
     }
@@ -44,7 +52,7 @@ public class WsController {
      */
     @MessageMapping("/sendToUser/{user}")
     public void sendToUser(@DestinationVariable String user, String msg, Principal principal) {
-        String data = "用户[" + principal.getName() + "]发送给用户[" + user + "]消息[" + msg + "]";
+        String data = "用户模式:用户[" + principal.getName() + "]发送给用户[" + user + "]消息[" + msg + "]";
         log.info(data);
         simpMessagingTemplate.convertAndSendToUser(user, "/queue/sendToUser", data);
     }

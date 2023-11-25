@@ -27,6 +27,11 @@
   <textarea id="broadcastMsg" readonly cols="50" rows="5"></textarea>
 </div>
 <div>
+  <h3>订阅模式</h3>
+  <h4>订阅消息：</h4>
+  <textarea id="subscribeMsg" readonly cols="50" rows="5"></textarea>
+</div>
+<div>
   <h3>用户模式</h3>
   <label for="userSendUsernameText">发送用户：</label>
   <input id="userSendUsernameText" type="text" value="ali">
@@ -47,6 +52,7 @@
   const url = 'wss://ws.404z.cn/api/ws'
   const broadcastSend = '/app/broadcast'
   const broadcastSubscribe = '/topic/broadcast'
+  const subscribeSubscribe = '/app/subscribe/订阅消息'
   const sendToUserSend = '/app/sendToUser/'
   const sendToUserSubscribe = '/user/queue/sendToUser'
 
@@ -56,6 +62,7 @@
   const broadcastText = document.getElementById('broadcastText')
   const broadcastBtn = document.getElementById('broadcastBtn')
   const broadcastMsg = document.getElementById('broadcastMsg')
+  const subscribeMsg = document.getElementById('subscribeMsg')
   const userSendUsernameText = document.getElementById('userSendUsernameText')
   const userText = document.getElementById('userText')
   const userBtn = document.getElementById('userBtn')
@@ -94,6 +101,10 @@
     // 广播消息
     stomp.subscribe(broadcastSubscribe, function (res) {
       broadcastMsg.value = res.body + '\n' + broadcastMsg.value
+    })
+    // 订阅消息
+    stomp.subscribe(subscribeSubscribe, function (res) {
+      subscribeMsg.value = res.body + '\n' + subscribeMsg.value
     })
     // 用户消息
     stomp.subscribe(sendToUserSubscribe, function (res) {

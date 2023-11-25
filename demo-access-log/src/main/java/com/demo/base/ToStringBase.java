@@ -18,11 +18,11 @@ import java.io.Serializable;
 public class ToStringBase implements Serializable {
 
     /**
-     * JSON格式
+     * JSON字符串
      */
     @Override
     public String toString() {
-        return JSON.toJSONString(this, FormatConstant.DATE, FormatConstant.JSON_WRITER_FEATURE);
+        return JSON.toJSONString(this, FormatConstant.DATE);
     }
 
 }

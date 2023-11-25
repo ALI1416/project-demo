@@ -58,80 +58,12 @@ public class Result<T> extends ToStringBase {
     }
 
     /**
-     * 构造函数
-     *
-     * @param code 状态码
-     * @param msg  状态信息
-     * @param data 数据
-     */
-    public Result(int code, String msg, T data) {
-        this.code = code;
-        this.msg = msg;
-        this.data = data;
-        this.ok = (this.code == ResultEnum.OK.getCode());
-    }
-
-    /**
-     * 成功
-     */
-    public static Result o() {
-        return new Result(ResultEnum.OK, null);
-    }
-
-    /**
      * 成功
      *
      * @param data 数据
      */
     public static <T> Result<T> o(T data) {
         return new Result<>(ResultEnum.OK, data);
-    }
-
-    /**
-     * 成功
-     *
-     * @param msg  状态信息
-     * @param data 数据
-     */
-    public static <T> Result<T> o(String msg, T data) {
-        return new Result<>(ResultEnum.OK.getCode(), msg, data);
-    }
-
-    /**
-     * 未知错误
-     */
-    public static Result e() {
-        return new Result(ResultEnum.ERROR, null);
-    }
-
-    /**
-     * 错误
-     *
-     * @param resultEnum 统一返回状态枚举
-     */
-    public static Result e(ResultEnum resultEnum) {
-        return new Result(resultEnum, null);
-    }
-
-    /**
-     * 错误
-     *
-     * @param resultEnum 统一返回状态枚举
-     * @param data       数据
-     */
-    public static <T> Result<T> e(ResultEnum resultEnum, T data) {
-        return new Result<>(resultEnum, data);
-    }
-
-    /**
-     * 错误
-     *
-     * @param resultEnum 统一返回状态枚举
-     * @param msg        状态信息
-     * @param data       数据
-     */
-    public static <T> Result<T> e(ResultEnum resultEnum, String msg, T data) {
-        return new Result<>(resultEnum.getCode(), msg, data);
     }
 
 }

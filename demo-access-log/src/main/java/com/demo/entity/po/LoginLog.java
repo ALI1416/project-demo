@@ -23,6 +23,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class LoginLog extends MongoEntityBase {
 
     /**
+     * URI
+     */
+    private String uri;
+    /**
+     * Method
+     */
+    private String method;
+    /**
      * IP地址
      */
     private String ip;
