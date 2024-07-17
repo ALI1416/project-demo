@@ -120,7 +120,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     /**
      * 获取关闭连接消息
      */
-    private Message<?> getDisconnectMessage(Message<?> message) {
+    public static Message<?> getDisconnectMessage(Message<?> message) {
         Map<String, Object> headers = new HashMap<>(3);
         headers.put("simpMessageType", SimpMessageType.DISCONNECT);
         headers.put("stompCommand", StompCommand.DISCONNECT);

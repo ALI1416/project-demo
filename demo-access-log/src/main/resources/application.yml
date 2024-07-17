@@ -19,9 +19,7 @@ server:
   port: 8080
 
 id:
-  machine-id: 0
-  machine-bits: 8
-  sequence-bits: 12
+  sequence-bits: 20
 
 ip2region:
   resource-path: /file/ip2region/ip2region.zdb
