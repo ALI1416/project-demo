@@ -29,10 +29,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0.0
  **/
 @SpringBootApplication
-public class DemoAccessLogApp {
+public class DemoWebApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoAccessLogApp.class, args);
+        SpringApplication.run(DemoWebApp.class, args);
     }
 
 }

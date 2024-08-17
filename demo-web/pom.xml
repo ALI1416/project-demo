@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>demo-access-log</artifactId>
+  <artifactId>demo-web</artifactId>
   <version>1.0.0</version>
 
-  <name>demo-access-log</name>
-  <description>访问记录示例</description>
-  <url>https://github.com/ALI1416/project-demo/tree/master/demo-access-log</url>
+  <name>demo-web</name>
+  <description>Web示例</description>
+  <url>https://github.com/ALI1416/springboot-demo/tree/master/demo-web</url>
 
   <parent>
     <groupId>com.demo</groupId>
@@ -22,6 +22,16 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!--SpringBoot WebSocket-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-websocket</artifactId>
+    </dependency>
+    <!--MongoDB-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
     </dependency>
     <!--FastJson-->
     <dependency>
@@ -38,10 +48,10 @@
       <groupId>cn.404z</groupId>
       <artifactId>ip2region-spring-boot-autoconfigure</artifactId>
     </dependency>
-    <!--MongoDB-->
+    <!--手机号码转区域-->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+      <groupId>cn.404z</groupId>
+      <artifactId>phone2region-spring-boot-autoconfigure</artifactId>
     </dependency>
   </dependencies>
 
