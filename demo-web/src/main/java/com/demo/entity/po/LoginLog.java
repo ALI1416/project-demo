@@ -27,7 +27,7 @@ public class LoginLog extends MongoEntityBase {
      */
     private String uri;
     /**
-     * Method
+     * 请求方法
      */
     private String method;
     /**
