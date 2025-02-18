@@ -18,7 +18,7 @@
     <!--org.springframework.boot:spring-boot-starter-parent-->
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.1</version>
+    <version>3.4.2</version>
   </parent>
 
   <modules>
@@ -40,10 +40,6 @@
 
     <!--SpringBoot WebSocket-->
     <!--org.springframework.boot:spring-boot-starter-websocket-->
-
-    <!--FastJson-->
-    <!--com.alibaba.fastjson2:fastjson2-->
-    <fastjson.version>2.0.52</fastjson.version>
 
 
     <!---->
@@ -69,19 +65,19 @@
     <!--父依赖不含-->
     <!--FastJson-->
     <!--com.alibaba.fastjson2:fastjson2-->
-    <fastjson.version>2.0.52</fastjson.version>
+    <fastjson.version>2.0.55</fastjson.version>
 
     <!--雪花ID生成器-->
     <!--cn.404z:id-spring-boot-autoconfigure-->
-    <id.version>3.2.0.single</id.version>
+    <id.version>3.3.0.single</id.version>
 
     <!--IP地址转区域-->
     <!--cn.404z:ip2region-spring-boot-autoconfigure-->
-    <ip2region.version>3.2.1</ip2region.version>
+    <ip2region.version>3.3.1</ip2region.version>
 
     <!--手机号码转区域-->
     <!--cn.404z:phone2region-spring-boot-autoconfigure-->
-    <phone2region.version>2.2.1</phone2region.version>
+    <phone2region.version>2.3.1</phone2region.version>
 
   </properties>
 
