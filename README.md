@@ -11,4 +11,4 @@
 ## 项目
 
 - `demo-web` Web示例
-  - `java -Xms32m -Xmx32m -jar demo-web-1.0.0.jar`
+  - `java -Xms32m -Xmx32m -XX:MaxDirectMemorySize=32m -jar demo-web-1.0.0.jar`
