@@ -18,7 +18,7 @@
     <!--org.springframework.boot:spring-boot-starter-parent-->
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.4.2</version>
+    <version>3.5.0</version>
   </parent>
 
   <modules>
@@ -65,7 +65,7 @@
     <!--父依赖不含-->
     <!--FastJson-->
     <!--com.alibaba.fastjson2:fastjson2-->
-    <fastjson.version>2.0.55</fastjson.version>
+    <fastjson.version>2.0.57</fastjson.version>
 
     <!--雪花ID生成器-->
     <!--cn.404z:id-spring-boot-autoconfigure-->
