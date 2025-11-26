@@ -9,6 +9,7 @@ import com.demo.entity.po.LoginLog;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 @AllArgsConstructor
+@Slf4j
 public class LoginLogService {
 
     private final LoginLogDao loginLogDao;
@@ -46,14 +48,29 @@ public class LoginLogService {
         loginLog.setIp(ip);
         try {
             loginLog.setIpInfo(Ip2Region.parse(ip));
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            log.error("Ip2Region转换失败", e);
         }
+        Integer port = null;
+        String portString = request.getHeader("X-Real-Port");
+        if (portString != null) {
+            try {
+                port = Integer.valueOf(portString);
+            } catch (Exception e) {
+                log.error("端口号转换失败", e);
+            }
+        }
+        if (port == null) {
+            port = request.getRemotePort();
+        }
+        loginLog.setPort(port);
         String userAgent = request.getHeader("User-Agent");
         if (userAgent != null) {
             loginLog.setUserAgent(userAgent);
             try {
                 loginLog.setUserAgentInfo(UserAgent.parse(userAgent));
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                log.error("UserAgent转换失败", e);
             }
         }
         long ok = loginLogDao.insert(loginLog);

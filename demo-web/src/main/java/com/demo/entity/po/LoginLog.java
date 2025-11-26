@@ -39,6 +39,10 @@ public class LoginLog extends MongoEntityBase {
      */
     private Region ipInfo;
     /**
+     * 端口号
+     */
+    private Integer port;
+    /**
      * UserAgent
      */
     private String userAgent;
